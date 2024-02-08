@@ -16,7 +16,7 @@ class Log_writer(object):
     def flush(self):
         pass
 log_time = time.strftime("-%Y%m%d-%H%M%S", time.localtime())  # 时间戳
-filename = 'log' + log_time + '.txt'
+filename = 'index-log' + log_time + '.txt'
 log_write = Log_writer(filename)  
 sys.stdout = log_write
 
@@ -104,4 +104,4 @@ else:
     sys.exit()
 
 print("日志已保存在程序所在目录,按Enter退出程序") 
-input("退出成功,Designed by y3team")
+input("按Enter退出,Designed by y3team")
