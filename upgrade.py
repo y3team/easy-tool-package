@@ -1,5 +1,5 @@
 import sys
-import urllib
+import urllib.request
 import os
 import ssl
 import time
@@ -33,7 +33,7 @@ else:
     print(f"Debug:目录'{check_directory}'存在")
     pass
 
-check_file = "./tempfile/index.py"#检测api.txt是否提前存在
+check_file = "./tempfile/index.py"#检测index.py是否提前存在
 if os.path.exists(check_file):
     print("Debug:index已存在,进行删除")
     if os.path.exists(check_file):
@@ -62,11 +62,24 @@ try:
     with urllib.request.urlopen(download_api_url, context=ssl_context) as response, open(api_filename_path, 'wb') as out_file:
         # 读取响应内容并保存到本地文件
         out_file.write(response.read())
-    print("Debug:api文件通过 SSL 证书验证下载成功！")
+    print("Debug:更新文件通过 SSL 证书验证下载成功！")
     pass
 except Exception as ssl_api_download_Error:
-    print(f"Error:api文件在下载过程中发生错误:{ssl_api_download_Error}")
+    print(f"Error:更新文件在下载过程中发生错误:{ssl_api_download_Error}")
     sys.exit()
 
-print("Debug:已进入update.py日志已保存在程序所在目录,按Enter退出程序") 
+local_index = "./index.py"
+os.remove(local_index)
+print("Debug:原始文件成功删除,进行下一步操作")
+def move_file(Uupgrade_file_path, Ppaste_file_path):
+    try:
+        os.rename(Uupgrade_file_path, Ppaste_file_path)
+        print(f"文件成功从 {Uupgrade_file_path} 移动到 {Ppaste_file_path}")
+    except Exception as copy_file_Error:
+        print(f"移动文件时发生错误：{copy_file_Error}")
+upgrade_file_path = './tempfile/index.py'
+paste_file_path = './index.py'
+move_file(upgrade_file_path, paste_file_path)
+
+print("Debug-U:日志已保存在程序所在目录,按Enter退出程序") 
 input("按Enter退出")
