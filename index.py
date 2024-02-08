@@ -47,6 +47,8 @@ if os.path.exists(check_file):
 else:
     pass
 
+print("Debug:正在从官网下载api文件")
+
 download_url = "https://www.y3hfg.cn/api/api.txt"#在此处填入
 savepath = "./tempfile/api.txt"
 try:
@@ -71,6 +73,7 @@ except Exception as e:
 
 if int(api_verb) ==100:#检测版本
     print("Debug:您的程序是最新版本")
+    os.remove(saving_api)
     pass
 elif int(api_verb) >100:
     print("Debug:当前版本不是最新版本，请立即更新")
@@ -81,4 +84,4 @@ else:
 
 
 print("日志已保存在程序所在目录，按Enter退出程序") 
-input("退出成功")
+input("退出成功,Designed by y3team")
