@@ -83,11 +83,11 @@ except Exception as read_api_Error:
     print("Error[已保存到日志]:打开文件时发生了错误", read_api_Error)
     sys.exit()
 
-if int(api_verb) ==110:#检测版本
+if int(api_verb) ==100:#检测版本
     print("Debug:您的程序是最新版本")
     os.remove(saving_api)
     pass
-elif int(api_verb) >90:
+elif int(api_verb) >100:
     print("Debug:当前版本不是最新版本，正在启动更新程序")
     upgrade_path = "upgrade.py"  # 替换为你的应用程序路径
     try:

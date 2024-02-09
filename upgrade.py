@@ -11,8 +11,6 @@ try:
         sha256_str = file.readline().strip()  # 使用strip()去除换行符
         print("Debug:api文件成功读取")
         pass
-
-
 except FileNotFoundError:
     print("Error[已保存到日志]:文件不存在(0.00001%遇到这个Error[已保存到日志]=)")
     sys.exit()
@@ -96,12 +94,13 @@ def calculate_sha256(file_path):
     return sha256_hash.hexdigest()
 update_file_path = "./tempfile/index.py"  # 替换为你要计算 SHA-256 的文件路径
 sha256_value = calculate_sha256(update_file_path)
-print("Debug:正在验证下载文件的SHA-256值:", sha256_value)
+print("Debug:正在验证下载文件的SHA-256值")
 if(sha256_str==sha256_value):
     print("Debug:已验证完毕更新程序")
     pass
 else:
-    print("您的更新程序疑似遭到篡改")
+    print("Debug:官网更新程序sha-256值为:",sha256_str)
+    print("Error:您的更新程序疑似遭到篡改:",sha256_value)
     os.remove(update_file_path)
     sys.exit()
 
