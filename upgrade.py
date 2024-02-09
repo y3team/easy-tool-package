@@ -103,7 +103,7 @@ if(sha256_str==sha256_value):
 else:
     print("您的更新程序疑似遭到篡改")
     os.remove(update_file_path)
-    sys.exit
+    sys.exit()
 
 local_index = "./index.py"
 os.remove(local_index)
