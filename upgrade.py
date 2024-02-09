@@ -3,7 +3,23 @@ import urllib.request
 import os
 import ssl
 import time
-import threading
+import hashlib
+saving_api = "./tempfile/api.txt"#读取api
+try:
+    with open(saving_api, 'r') as file:
+        api_verb = file.readline().strip()  # 使用strip()去除换行符
+        sha256_str = file.readline().strip()  # 使用strip()去除换行符
+        print("Debug:api文件成功读取")
+        pass
+
+
+except FileNotFoundError:
+    print("Error[已保存到日志]:文件不存在(0.00001%遇到这个Error[已保存到日志]=)")
+    sys.exit()
+except Exception as read_api_Error:
+    print("Error[已保存到日志]:打开文件时发生了错误", read_api_Error)
+    sys.exit()
+    
 class Log_writer(object):
     def __init__(self, filename="Default.log"):
         self.terminal = sys.stdout
@@ -67,6 +83,26 @@ try:
 except Exception as ssl_api_download_Error:
     print(f"Error:更新文件在下载过程中发生错误:{ssl_api_download_Error}")
     sys.exit()
+
+def calculate_sha256(file_path):
+    # 创建一个 SHA-256 hash 对象
+    sha256_hash = hashlib.sha256()
+    # 以二进制读模式打开文件
+    with open(file_path, "rb") as f:
+        # 从文件中逐块读取数据并更新 hash 值
+        for chunk in iter(lambda: f.read(4096), b""):
+            sha256_hash.update(chunk)
+    # 返回计算出的 SHA-256 值的十六进制表示
+    return sha256_hash.hexdigest()
+update_file_path = "./tempfile/index.py"  # 替换为你要计算 SHA-256 的文件路径
+sha256_value = calculate_sha256(update_file_path)
+print("Debug:正在验证下载文件的SHA-256值:", sha256_value)
+if(sha256_str==sha256_value):
+    print("Debug:已验证完毕更新程序")
+    pass
+else:
+    print("您的更新程序疑似遭到篡改")
+    sys.exit
 
 local_index = "./index.py"
 os.remove(local_index)

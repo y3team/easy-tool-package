@@ -16,7 +16,7 @@ class Log_writer(object):
     def flush(self):
         pass
 log_time = time.strftime("-%Y%m%d-%H%M%S", time.localtime())  # 时间戳
-filename = 'index-log' + log_time + '.txt'
+filename = './index-log' + log_time + '.txt'
 log_write = Log_writer(filename)  
 sys.stdout = log_write
 
@@ -73,7 +73,7 @@ except Exception as ssl_api_download_Error:
 saving_api = "./tempfile/api.txt"#读取api
 try:
     with open(saving_api, 'r') as file:
-        api_verb = file.read()
+        api_verb = file.readline().strip()  # 使用strip()去除换行符
         print("Debug:api文件成功读取")
         pass
 except FileNotFoundError:
@@ -99,7 +99,6 @@ elif int(api_verb) >90:
         print("Error:打开应用程序时出现错误：", upgrade_app_Error)
         sys.exit()
 else:
-    
     print("Error[已保存到日志]:遇到未知错误,请发送日志到y3team@outlook.com")
     sys.exit()
 
