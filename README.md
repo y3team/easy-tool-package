@@ -23,3 +23,6 @@
   2.非常重要！先将index.py和upgrade.py所有xxx.py改为xxx.exe<br>
   3.依然很重要！！把upgrade中的"/"都改为windows使用的"\\",避免在移动更新文件过程中闪退
 </p>
+
+# 编译完成的exe版
+https://y3team.lanzv.com/iNTnx1nzsbgf 蓝奏云
