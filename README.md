@@ -19,7 +19,7 @@
 # 编译时的注意事项
 <p>
   1编译时推荐使用pyinstaller模块<br>
-  可以通过pip install pyinstaller安装
-  2.非常重要！先将index.py和upgrade.py所有xxx.py改为xxx.exe
+  可以通过pip install pyinstaller安装<br>
+  2.非常重要！先将index.py和upgrade.py所有xxx.py改为xxx.exe<br>
   3.依然很重要！！把upgrade中的"/"都改为windows使用的"\\",避免在移动更新文件过程中闪退
 </p>
