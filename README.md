@@ -8,9 +8,8 @@
 6.如果有BUG，请反馈至y3team@outlook.com,up是初中生，可能不能及时处理您的日志！<br>
 祝您使用愉快！新春快乐<br>
 7.十分重要！当软件意外退出的时候，请打开本文件所在目录的子目录log下。程序会记录下来错误日志。<br>
-2024.2.11<br>
-https://www.y3hfg.cn<br>
-y3team
+2024.2.11 y3team<br>
+https://www.y3hfg.cn
 </p>
 
 # 需要编译的文件
