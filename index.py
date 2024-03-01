@@ -3,6 +3,7 @@ import urllib.request
 import sys
 import time
 import ssl
+import wmi
 
 class Log_writer(object):
     def __init__(self, filename="Default.log"):
@@ -83,11 +84,11 @@ except Exception as read_api_Error:
     print("Error[已保存到日志]:打开文件时发生了错误", read_api_Error)
     sys.exit()
 
-if int(api_verb) ==100:#检测版本
-    print("Debug:您的程序是最新版本")
+if int(api_verb) ==101:#检测版本
+    print("Debug:您的程序是最新版本,Enter键启动")
     os.remove(saving_api)
     pass
-elif int(api_verb) >100:
+elif int(api_verb) >101:
     print("Debug:当前版本不是最新版本，正在启动更新程序")
     upgrade_path = "upgrade.py"  # 替换为你的应用程序路径
     try:
@@ -101,6 +102,42 @@ elif int(api_verb) >100:
 else:
     print("Error[已保存到日志]:遇到未知错误,请发送日志到y3team@outlook.com")
     sys.exit()
+    
+program_directory = os.getcwd()
+
+def change_dns(dns_1, dns_2):
+    try:
+        # 连接到 WMI
+        c = wmi.WMI()
+
+        # 获取所有网络适配器配置
+        adapters = c.Win32_NetworkAdapterConfiguration(IPEnabled=True)
+
+        # 循环遍历每个网络适配器
+        for adapter in adapters:
+            # 修改 DNS 设置
+            # 注意：这里假设只有一个适配器是 IPv4 的，如果你的环境有特殊需求，可以根据情况修改代码
+            adapter.SetDNSServerSearchOrder([dns_1, dns_2])
+            print("Debug:DNS设置已成功修改。")
+            return True
+    except Exception as Change_Dns_Error:
+        print("发生错误：", Change_Dns_Error)
+        return False
+while True:
+    print("""
+======工具包v1.1.0pre4======
+(1)更改dns     (2)退出
+============================      
+          """)
+    get_command = input("main>>>")
+    if get_command=="1":
+        dns_1 = input("请输入主DNS(如114.114.114.114):")
+        dns_2 = input("请输入备用DNS(如8.8.8.8):")
+        change_dns(dns_1,dns_2)
+        continue
+    elif get_command=="2":
+        print("日志已保存在程序所在目录") 
+        break
 
 print("日志已保存在程序所在目录,按Enter退出程序") 
-input("按Enter退出,Designed by y3team")
+input("Designed by y3team")
